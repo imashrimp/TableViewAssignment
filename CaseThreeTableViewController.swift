@@ -15,18 +15,18 @@ class CaseThreeTableViewController: UITableViewController {
     var shoppingList: [String] = ["샤워기 호스", "샤워기 헤더", "면도기", "위생백"]
     var userDefaultsShoppingList = UserDefaults.standard.stringArray(forKey: "shoppingList")
     
-    
-    var idk: [String] {
-        get {
-            guard let test = UserDefaults.standard.stringArray(forKey: "shoppingList") else {
-                return shoppingList
-            }
-            return test
-        }
-        set {
-            self.idk = newValue
-        }
-    }
+    //MARK: - 여기 나중에 더 배우고 고쳐보자
+//    var computedArray: [String] {
+//        get {
+//            guard let test = UserDefaults.standard.stringArray(forKey: "shoppingList") else {
+//                return shoppingList
+//            }
+//            return test
+//        }
+//        set {
+//            userDefaultsShoppingList = newValue
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,12 @@ class CaseThreeTableViewController: UITableViewController {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         guard let shoppingItem = shoppingItemTextField.text else { return }
         
-        guard let item = UserDefaults.standard.stringArray(forKey: "shoppingList") else {
+        //MARK: - 여기 고쳐야한다 더 배우면
+//        computedArray.insert(shoppingItem, at: 0)
+//        UserDefaults.standard.set(computedArray, forKey: "shoppingList")
+//        computedArray = computedArray
+        
+        guard let item = userDefaultsShoppingList else {
             shoppingList.insert(shoppingItem, at: 0)
             UserDefaults.standard.set(shoppingList, forKey: "shoppingList")
             userDefaultsShoppingList = UserDefaults.standard.stringArray(forKey: "shoppingList")
@@ -53,12 +58,12 @@ class CaseThreeTableViewController: UITableViewController {
             return
         }
         
-        var newItem: [String] = []
-        newItem = item
-        newItem.insert(shoppingItem, at: 0)
-        UserDefaults.standard.setValue(newItem, forKey: "shoppingList")
+        userDefaultsShoppingList = item
+        userDefaultsShoppingList?.insert(shoppingItem, at: 0)
+        UserDefaults.standard.setValue(userDefaultsShoppingList, forKey: "shoppingList")
         userDefaultsShoppingList = UserDefaults.standard.stringArray(forKey: "shoppingList")
         tableView.reloadData()
+
     }
     
     func configureButton(title: String, titleColor:UIColor, backgroundColor: UIColor) {
