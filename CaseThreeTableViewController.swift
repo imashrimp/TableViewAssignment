@@ -8,7 +8,7 @@
 import UIKit
 
 class CaseThreeTableViewController: UITableViewController {
-
+    
     @IBOutlet var shoppingItemTextField: UITextField!
     @IBOutlet var addButton: UIButton!
     
@@ -16,10 +16,17 @@ class CaseThreeTableViewController: UITableViewController {
     var userDefaultsShoppingList = UserDefaults.standard.stringArray(forKey: "shoppingList")
     
     
-//    var idk: [String] {
-//
-//        return UserDefaults.standard.stringArray(forKey: "shoppingList") != nil ? UserDefaults.standard.stringArray(forKey: "shoppingList") : shoppingList
-//    }
+    var idk: [String] {
+        get {
+            guard let test = UserDefaults.standard.stringArray(forKey: "shoppingList") else {
+                return shoppingList
+            }
+            return test
+        }
+        set {
+            self.idk = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +39,7 @@ class CaseThreeTableViewController: UITableViewController {
         configureButton(title: "추가",
                         titleColor: .white,
                         backgroundColor: .systemOrange)
-
+        
     }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
@@ -85,7 +92,7 @@ class CaseThreeTableViewController: UITableViewController {
         
         cell.textLabel?.text = newList[indexPath.row]
         
-
+        
         return cell
     }
     

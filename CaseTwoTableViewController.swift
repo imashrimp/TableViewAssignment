@@ -17,7 +17,6 @@ class CaseTwoTableViewController: UITableViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .black
         tableView.backgroundColor = .black
-
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
